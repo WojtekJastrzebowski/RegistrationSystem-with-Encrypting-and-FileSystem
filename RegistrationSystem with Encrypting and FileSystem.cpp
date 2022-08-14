@@ -10,7 +10,37 @@
 
 using namespace std;
 
+bool IsCorrect(string username, string password) {
+	int unlength = username.size();
+	int pwlength = password.size();
 
+	if (unlength < 8) {
+		return false;
+	}
+	if (pwlength < 8) {
+		return false;
+	}
+	return true;
+}
+bool IsAlreadyRegistered(string username, string password) {
+	string un;
+
+	ifstream myFile("users.txt", ios::in);
+	if (!myFile) {
+		cerr << "Cannot open file\n";
+		exit(1);
+	}
+	else {
+		while (myFile >> un)
+		{
+			if (un == username)
+			{
+				return false;
+			}
+		}
+	}
+	return true;
+}
 
 bool IsLoggedIn() {
 	string username, password, un, pw, hashpw;
@@ -38,7 +68,9 @@ bool IsLoggedIn() {
 			}
 		}
 	}
+
 	myFile.seekg(0);
+
 	for (int i = 0; getline(myFile, pw) && i < (linecount+1); i++) {
 		if (i == (linecount)) {
 			break;
@@ -89,14 +121,27 @@ loop:
 			cout << "Enter password: ";
 			cin >> password;
 
-			hashpw = sha256(password);
-
-			ofstream myFile("users.txt", ios::app);
-			myFile << username << endl << hashpw << endl;
-			myFile.close();
-
-			cout << "Registered successfully!\n\n";
-			goto loop;
+			bool status1 = IsCorrect(username, password);
+			bool status2 = IsAlreadyRegistered(username, password);
+			
+			if (!status1) {
+				cout << "Username or/and password are wrong specifed!\n";
+				cout << "(The username and password must have at least 8 characters)\n\n";
+				goto loop;
+			}
+			else if (!status2) {
+				cout << "Username are already in use!\n";
+				cout << "Please use another username or log in!\n\n";
+				goto loop;
+			}
+			else {
+				hashpw = sha256(password);
+				ofstream myFile("users.txt", ios::app);
+				myFile << username << endl << hashpw << endl;
+				myFile.close();
+				cout << "Registered successfully!\n\n";
+				goto loop;
+			}
 		}
 		case 2: {
 			bool status = IsLoggedIn();
