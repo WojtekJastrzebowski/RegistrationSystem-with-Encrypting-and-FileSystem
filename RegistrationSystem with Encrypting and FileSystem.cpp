@@ -113,7 +113,7 @@ loop:
 		switch (option) {
 		case 1: {
 			string username, password, hashpw;
-
+			ofstream myFile("users.txt", ios::app);
 			SHA256 sha256;
 
 			cout << "Enter username: ";
@@ -136,7 +136,7 @@ loop:
 			}
 			else {
 				hashpw = sha256(password);
-				ofstream myFile("users.txt", ios::app);
+				
 				myFile << username << endl << hashpw << endl;
 				myFile.close();
 				cout << "Registered successfully!\n\n";
