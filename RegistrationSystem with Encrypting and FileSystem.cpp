@@ -1,4 +1,12 @@
-﻿
+﻿/*
+
+	Title			: Registration System with SHA-256 Encrypting and FileSystem
+	Language		: C++
+	Author			: Wojciech Jastrzebowski
+	Date Created	: 13-08-2022
+
+*/
+
 #include <iostream>
 #include <fstream>
 #include <limits>
@@ -27,7 +35,7 @@ bool IsAlreadyRegistered(string username, string password) {
 
 	ifstream myFile("users.txt", ios::in);
 	if (!myFile) {
-		cerr << "Cannot open file\n";
+		cerr << setw(25) << "Cannot open file\n";
 		exit(1);
 	}
 	else {
@@ -41,21 +49,20 @@ bool IsAlreadyRegistered(string username, string password) {
 	}
 	return true;
 }
-
 bool IsLoggedIn() {
 	string username, password, un, pw, hashpw;
 	int linecount = 0;
 
 	SHA256 sha256;
 
-	cout << "Enter your Username: ";
+	cout << setw(29) << "Enter your Username: ";
 	cin >> username;
-	cout << "Enter your Password: ";
+	cout << setw(29) << "Enter your Password: ";
 	cin >> password;
 
 	ifstream myFile("users.txt", ios::in);
 	if (!myFile) {
-		cerr << "Cannot open file\n";
+		cerr << setw(25) << "Cannot open file\n";
 		exit(1);
 	}
 	else {
@@ -84,17 +91,18 @@ bool IsLoggedIn() {
 		return false;
 	}
 }
-
 int main() {
 
 	int option = 0, line_no = 0, count = 0;
 	string optioncheck;
 loop:
-	cout << "Registration System 1.0\n";
-	cout << "1: Register\n";
-	cout << "2: LogIn\n";
-	cout << "0: Close Program\n\n";
-	cout << "Choose Option: ";
+	cout << "|" << setw(30) << "Registration System 1.0" << setw(9) << "|\n";
+	cout << "|" << "-------------------------------------" << "|\n";
+	cout << "|" << setw(18) << "1: REGISTER" << setw(21) << "|\n";
+	cout << "|" << setw(15) << "2: LOGIN" << setw(24) << "|\n";
+	cout << "|" << setw(23) << "0: CLOSE PROGRAM" << setw(16) << "|\n";
+	cout << "|" << "_____________________________________" << "|\n";
+	cout << setw(28) << "Choose Your Option: ";
 	cin >> optioncheck;
 
 	for (int i = 0; i < optioncheck.length(); i++)
@@ -116,22 +124,22 @@ loop:
 			ofstream myFile("users.txt", ios::app);
 			SHA256 sha256;
 
-			cout << "Enter username: ";
+			cout << setw(24) << "Enter username: ";
 			cin >> username;
-			cout << "Enter password: ";
+			cout << setw(24) << "Enter password: ";
 			cin >> password;
 
 			bool status1 = IsCorrect(username, password);
 			bool status2 = IsAlreadyRegistered(username, password);
 			
 			if (!status1) {
-				cout << "Username or/and password are wrong specifed!\n";
-				cout << "(The username and password must have at least 8 characters)\n\n";
+				cout << setw(51) << "Username or/and password are wrong specifed!\n";
+				cout << setw(69) << "(The username and password must have at least 8 characters)\n\n";
 				goto loop;
 			}
 			else if (!status2) {
-				cout << "Username are already in use!\n";
-				cout << "Please use another username or log in!\n\n";
+				cout << setw(37) << "Username are already in use!\n";
+				cout << setw(48) << "Please use another username or log in!\n\n";
 				goto loop;
 			}
 			else {
@@ -139,18 +147,18 @@ loop:
 				
 				myFile << username << endl << hashpw << endl;
 				myFile.close();
-				cout << "Registered successfully!\n\n";
+				cout << setw(34) << "Registered successfully!\n\n";
 				goto loop;
 			}
 		}
 		case 2: {
 			bool status = IsLoggedIn();
 			if (!status) {
-				cout << "Username or Password are false!\n\n";
+				cout << setw(41) << "Username or Password are false!\n\n";
 				goto loop;
 			}
 			else {
-				cout << "Succesfully logged in!\n\n";
+				cout << setw(32) << "Succesfully logged in!\n\n";
 				system("PAUSE");
 				return 1;
 			}
@@ -160,13 +168,13 @@ loop:
 			return 0;
 		}
 		default: {
-			cout << "The wrong parameter has been specified!\n\n";
+			cout << setw(49) << "The wrong parameter has been specified!\n\n";
 			goto loop;
 		}
 		}
 	}
 	else {
-		cout << "The wrong parameter has been specified!\n\n";
+		cout << setw(49) << "The wrong parameter has been specified!\n\n";
 		goto loop;;
 	}
 	return 0;
