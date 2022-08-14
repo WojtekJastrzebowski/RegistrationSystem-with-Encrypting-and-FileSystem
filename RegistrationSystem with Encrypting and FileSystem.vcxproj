@@ -72,6 +72,10 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>C:\\Users\\WEB\\OneDrive\\Pulpit\\C++ PROJECTS\\RegistrationSystem with Encrypting and FileSystem</IncludePath>
+    <ExecutablePath>C:\\Users\\WEB\\OneDrive\\Pulpit\\C++ PROJECTS\\RegistrationSystem with Encrypting and FileSystem;$(ExecutablePath)</ExecutablePath>
+    <ExternalIncludePath>C:\\Users\\WEB\\OneDrive\\Pulpit\\C++ PROJECTS\\RegistrationSystem with Encrypting and FileSystem;$(ExternalIncludePath)</ExternalIncludePath>
+    <SourcePath>C:\\Users\\WEB\\OneDrive\\Pulpit\\C++ PROJECTS\\RegistrationSystem with Encrypting and FileSystem;$(SourcePath)</SourcePath>
+    <PublicIncludeDirectories>C:\\Users\\WEB\\OneDrive\\Pulpit\\C++ PROJECTS\\RegistrationSystem with Encrypting and FileSystem</PublicIncludeDirectories>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -103,10 +107,11 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\WEB\OneDrive\Pulpit\C++ PROJECTS\RegistrationSystem with Encrypting and FileSystem;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
