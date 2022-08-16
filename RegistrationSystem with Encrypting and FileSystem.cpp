@@ -175,7 +175,7 @@ loop:
 	}
 	else {
 		cout << setw(49) << "The wrong parameter has been specified!\n\n";
-		goto loop;;
+		goto loop;
 	}
 	return 0;
 }
